@@ -3,26 +3,26 @@
 if($_GET){
 
 if(isset($_GET["a"])){a();}
-if(isset($_GET["p"])){a();}
-if(isset($_GET["d"])){a();}
+if(isset($_GET["p"])){p();}
+if(isset($_GET["d"])){d();}
 
 }
 
 function p()
 {
-header("Location:patient.html");
+header("Location:patient.php");
 die();
 }
 
 function d()
 {
-header("Location:doctor.html");
+header("Location:doctor.php");
 die();
 }
 
 function a()
 {
-header("Location:admin.html");
+header("Location:admin.php");
 die();
 }
 

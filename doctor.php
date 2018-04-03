@@ -2,6 +2,7 @@
 
 
 <?php
+    session_start();
 databaseconn();
 if($_GET){
 
@@ -11,14 +12,12 @@ if(isset($_GET["d"])){d();}
 
 }
 $servername=$username=$password=$conn=$db;
-
-
-
+    $uname=$pass="";
 
 
 Function login()
 {
-Global $servername,$username,$password,$conn,$db;
+Global $servername,$username,$password,$conn,$db,$uname,$pass;
 
 $uname=$_GET["uname"];
 $pass=$_GET["psw"];
@@ -35,13 +34,11 @@ dashboard();
 }
 Else { echo" login unsuccessful.";  echo "Error: "  . "<br>" . $conn->error;}
 }
-Function setscookie(){}
-Function dashboard() {}
 
 
 Function logincheck($arg1,$arg2)
 {
- Global $servername,$username,$password,$conn,$db;
+ Global $servername,$username,$password,$conn,$db,$uname,$pass;
  $sql="SELECT * from doctors where uname = '$arg1' AND password='$arg2';";
 Echo $sql;
 $result = $conn->query($sql);
@@ -50,6 +47,8 @@ $result = $conn->query($sql);
  if(mysqli_num_rows($result) > 0)
     {
      $flag=1;
+        $_SESSION['login_user']=$uname;
+        header("location: ddash.php");
     }
 
 Echo"flag".$flag;
@@ -60,7 +59,7 @@ Return $flag;
 
 Function register()
 {
-Global $servername,$username,$password,$conn,$db;
+Global $servername,$username,$password,$conn,$db,$uname,$pass;
 $fname=$_GET["uname"];
 $lname=$_GET["fname"];
 $mob=$_GET["mob"];
