@@ -9,7 +9,6 @@ if(isset($_GET["l"])){l();}
 if(isset($_GET["update"])){update();}
 
     if(isset($_GET["cappoint"])){cappoint();}
-    if(isset($_GET["vappoint"])){vappoint();}
 }
 
 function d()
@@ -39,10 +38,6 @@ function cappoint()
     {
         header("Location: docappoint.php");
     }
-    function vappoint()
-    {
-        header("Location: docvappoint.php");
-    }
 ?>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
 
@@ -53,7 +48,6 @@ function cappoint()
 
 <button type="submit" name="cappoint">Check Appointments</button>
 
-<button type="submit" name="vappoint">View Appointments</button>
 <button type="submit" name="l">Logout</button>
 </form>
 

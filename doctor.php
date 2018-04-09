@@ -11,8 +11,10 @@ if(isset($_GET["register"])){register();}
 if(isset($_GET["d"])){d();}
 
 }
-$servername=$username=$password=$conn=$db;
+$servername=$username=$password=$conn=$db="";
     $uname=$pass="";
+    $fname=$lname=$dif=$email=$psw=$pswrep=$uname="";
+    $mob=0;
 
 
 Function login()
@@ -56,10 +58,11 @@ Return $flag;
 }
 
 
-
+  
 Function register()
 {
 Global $servername,$username,$password,$conn,$db,$uname,$pass;
+    $mob=0;
 $fname=$_GET["uname"];
 $lname=$_GET["fname"];
 $mob=$_GET["mob"];
@@ -70,17 +73,24 @@ $pswrep=$_GET["psw-repeat"];
 $remember=$_GET["remember"];
 $uname=$_GET["uname"];
 Echo "validation of fields left.";
+    $sql = "INSERT INTO doctors VALUES('$fname','$lname','$mob','$dif','$email','$psw','$uname');";
+    if ($conn->query($sql) == TRUE) {
+        echo "New record created successfully";
+        
+        logincheck($uname,$psw);
+    }
+    else{
+        header("location: doctor.php");
+    }
+   
 
 
-$sql = "INSERT INTO doctors VALUES('$fname','$lname','$mob','$dif','$email','$psw','$uname');";
-if ($conn->query($sql) == TRUE) {
-    echo "New record created successfully";
 }
-Else{  echo "Error: " . $sql . "<br>" . $conn->error;}
+    
+    
 
 
 
-}
 
 
 
