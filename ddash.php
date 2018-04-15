@@ -7,11 +7,18 @@ if(isset($_GET["c"])){c();}
 if(isset($_GET["d"])){d();}
 if(isset($_GET["l"])){l();}
 if(isset($_GET["update"])){update();}
+    
+    if(isset($_GET["chat"])){chat();}
 
     if(isset($_GET["cappoint"])){cappoint();}
     if(isset($_GET["vappoint"])){vappoint();}
 }
-
+function chat()
+    {
+        
+        header("Location: docsoc.php");
+        
+    }
 function d()
 {
 echo $_SESSION['login_user']; 
@@ -54,6 +61,8 @@ function cappoint()
 <button type="submit" name="cappoint">Check Appointments</button>
 
 <button type="submit" name="vappoint">View Appointments</button>
+
+<button type="submit" name="chat">Open Chat app</button>
 <button type="submit" name="l">Logout</button>
 </form>
 

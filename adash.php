@@ -26,17 +26,17 @@ header("Location: index.php");
 function c()
 {
     
-    header("Location: docchangepassword.php");
+    header("Location: achangepassword.php");
 }
 function update()
     {
         
-        header("Location: docupdatedetails.php");
+        header("Location: addsymp.php");
     }
 
 function cappoint()
     {
-        header("Location: docappoint.php");
+        header("Location: aappoint.php");
     }
 ?>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
@@ -44,7 +44,7 @@ function cappoint()
   <button type="submit" name="d">Display</button>
 <button type="submit" name="c">Change Password</button>
 
-<button type="submit" name="update">Update Details</button>
+<button type="submit" name="update">Add Disease Values</button>
 
 <button type="submit" name="cappoint">Check Appointments</button>
 

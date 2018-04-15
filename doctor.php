@@ -84,21 +84,9 @@ Echo "validation of fields left.";
     }
    
 
-
 }
     
     
-
-
-
-
-
-
-
-
-
-
-
 
 
 // DATABASE CONNECTIVITY.
