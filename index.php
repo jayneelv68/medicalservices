@@ -10,7 +10,7 @@ if(isset($_GET["d"])){d();}
 
 function p()
 {
-header("Location:patient.php");
+header("Location:patient_login.php");
 die();
 }
 

@@ -1,6 +1,15 @@
 <html>
 <?php
 session_start();
+if(isset($_SESSION['login_user']) && !empty($_SESSION['login_user'])) 
+	{
+		;
+	}
+
+	else
+	{
+		echo "<script type='text/javascript'>window.open('index.php');</script>";
+	}
 if($_GET){
 
 if(isset($_GET["c"])){c();}

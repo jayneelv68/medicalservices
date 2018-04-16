@@ -2,6 +2,15 @@
 
 <?php
     session_start();
+	if(isset($_SESSION['login_user']) && !empty($_SESSION['login_user'])) 
+	{
+		;
+	}
+
+	else
+	{
+		echo "<script type='text/javascript'>window.open('index.php');</script>";
+	}
     if($_GET){
         
         if(isset($_GET["c"])){c();}
@@ -72,6 +81,7 @@
 
     
     $servername=$username=$password=$conn=$db="";
+   
 $uname=$_SESSION['login_user'];
     //echo $_SESSION['login_user'];
 databaseconn();
@@ -87,6 +97,7 @@ if(isset($_GET["cancel"])){cancel();}
 //$sql1="select did from doctors where uname='$uname'";
 //$result = $conn->query($sql1);
 //$did=mysqli_fetch_assoc($result);
+    echo $uname;
     $sql="select * from appointment WHERE hospital=(select did from doctors where uname='$uname') AND ctime > '0000-00-00';";
 $result = $conn->query($sql);
    // echo $sql;

@@ -58,6 +58,15 @@ function setsymptom3(valueToSet){
 <body>
 <?php
 session_start();
+if(isset($_SESSION['login_user']) && !empty($_SESSION['login_user'])) 
+	{
+		;
+	}
+
+	else
+	{
+		echo "<script type='text/javascript'>window.open('index.php');</script>";
+	}
     
     $servername=$username=$password=$conn=$db="";
 $uname=$_SESSION['login_user'];
@@ -78,7 +87,7 @@ $uname=$_SESSION['login_user'];
 $servername = "localhost";
 $username = "root";
 $password = "";
-$db="lampt";
+$db="lamp";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,$db);
 
@@ -250,7 +259,7 @@ $sql = "SELECT * FROM symptom where problem='$Problem' AND symptom1='$Symptom1' 
  
     while($row = mysqli_fetch_assoc($result))
 	{
-      $disease_name=$row["dieasease_name"];
+      $disease_name=$row["disease_name"];
 	  $medicine=$row["medicine"];
 	  $hospital=$row["hospital"];
 	  //echo "sdfds";

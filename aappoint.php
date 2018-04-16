@@ -57,7 +57,7 @@ Appointments:
     $servername=$username=$password=$conn=$db="";
     $uname=$_SESSION['login_user']="jay";
     $row=$columnOne=$columnTwo=$columnThree=$columnFour=$columnFive=$up="";
-    echo $_SESSION['login_user'];
+    //echo $_SESSION['login_user'];
     databaseconn();
     $sql="select * from appointment;";
    
@@ -94,7 +94,7 @@ $columnSix=$row['hospital'];
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        echo "Connected successfully";
+       // echo "Connected successfully";
     }
     
     

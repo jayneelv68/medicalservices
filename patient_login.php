@@ -3,27 +3,45 @@
 
 <?php
     session_start();
-databaseconn();
-if($_GET){
 
-if(isset($_GET["login"])){login();}
-if(isset($_GET["register"])){register();}
-if(isset($_GET["d"])){d();}
+
+
+Global $servername,$username,$password,$conn,$db;
+$servername = "localhost";
+$username = "root";
+$password = "";
+$db="lamp";
+// Create connection
+$conn=mysqli_connect($servername, $username, $password,$db);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+echo "Connected successfully";
+
+
+
+if($_POST){
+
+if(isset($_POST["login"])){login();}
+if(isset($_POST["register"])){register();}
+if(isset($_POST["d"])){d();}
 
 }
 $servername=$username=$password=$conn=$db="";
     $uname=$pass="";
     $name=$email=$psw=$pswrep=$uname=$city="";
     $mob=0;
+	
 
 
 Function login()
 {
 Global $servername,$username,$password,$conn,$db,$uname,$pass;
 
-$uname=$_GET["uname"];
-$pass=$_GET["psw"];
-$remember=$_GET["remember"];
+$uname=$_POST["uname"];
+$pass=$_POST["psw"];
+$remember=$_POST["remember"];
 
 If($remember=="on"){ echo" save session or cookie.";}
 
@@ -36,6 +54,8 @@ dashboard();
 }
 Else { echo" login unsuccessful.";  echo "Error: "  . "<br>" . $conn->error;}
 }
+
+
 
 
 Function logincheck($arg1,$arg2)
@@ -58,21 +78,76 @@ Return $flag;
 }
 
 
+
+
   
 Function register()
 {
+	
+	
+  
+  
 Global $servername,$username,$password,$conn,$db,$uname,$pass;
-    $mob=0;
+$nameerr=$passerr1=$passerr2=$cityerr="";
+ 
 
-$name=$_GET["name"];
-$mob=$_GET["mob"];
-$email=$_GET["email"];
-$psw=$_GET["psw"];
-$pswrep=$_GET["psw-repeat"];
-$city=$_GET["city"];
-$remember=$_GET["remember"];
-$uname=$_GET["uname"];
+$name=$_POST["name"];
+if(empty($name))
+{
+	$nameerr="Name is empty";
+	echo "Name is not filled";
+	//echo $nameerr;
+}
+
+
+$email=$_POST["email"];
+$pattern1="/^[a-zA-Z0-9]{2}[a-zA-Z0-9_.+-]*[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/";
+if(!preg_match($pattern1,$email))
+{
+	$emailerr="Entered email address is not proper";
+	echo "Entered email address is not proper" ;
+}
+
+$psw=$_POST["psw"];
+$uppercase = preg_match('@[A-Z]@', $psw);
+$lowercase = preg_match('@[a-z]@', $psw);
+$number    = preg_match('@[0-9]@',$psw);
+
+if(!$uppercase || !$lowercase || !$number || strlen($psw) < 8)
+{
+  $passerr1="Wrong password";
+  echo "Wrong password";
+}
+else
+{
+	$passvalue1=$psw;
+}
+
+$pswrep=$_POST["psw-repeat"];
+if($passvalue1==$pswrep)
+{
+	echo "Password accepted";
+}
+else
+{
+	$passerr2="Password doesn't match";
+	echo "Password doesn't match";
+}
+$city=$_POST["city"];
+if(empty($city))
+{
+	$cityerr="Address can't be empty";
+	echo "Address can't be empty";
+}
+
+$remember=$_POST["remember"];
+$uname=$_POST["uname"];
 Echo "validation of fields left.";
+
+
+if($nameerr=="" && $cityerr=="" && $passerr1=="" && $passerr2=="")
+{
+	
     $sql = "INSERT INTO patientdetail(uname,p_name,p_contact,p_email,p_address,p_password) VALUES('$uname','$name','$mob','$email','$city','$psw');";
     if ($conn->query($sql) == TRUE) {
         echo "New record created successfully";
@@ -83,40 +158,16 @@ Echo "validation of fields left.";
         header("location: patient.php");
     }
    
-
+}
 
 }
     
-    
+   
 
 
 
 
 
-
-
-
-
-
-
-
-
-// DATABASE CONNECTIVITY.
-
-Function databaseconn(){
-Global $servername,$username,$password,$conn,$db;
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db="lampt";
-// Create connection
-$conn=mysqli_connect($servername, $username, $password,$db);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-echo "Connected successfully";
-}
 
 
 ?>
@@ -129,7 +180,7 @@ echo "Connected successfully";
 <tr>
 <td>
 LOGIN
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
   <div class="container">
     <label for="uname"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="uname" required>
@@ -150,7 +201,7 @@ LOGIN
 
 <td>
 REGISTER
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
+<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
 
 <br>
 <label for="uname"><b>Username</b></label>
@@ -161,9 +212,6 @@ REGISTER
     <input type="text" placeholder="James " name="name" required>
 <br>
 
-<label for="mobile"><b>Contact Number</b></label>
-    <input type="text" placeholder="9978996060 " name="mob" required>
-<br>
 
         <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" required>

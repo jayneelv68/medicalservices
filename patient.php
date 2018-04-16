@@ -1,10 +1,19 @@
 <html>
 <?php
 session_start();
+if(isset($_SESSION['login_user']) && !empty($_SESSION['login_user'])) 
+	{
+		;
+	}
+
+	else
+	{
+		echo "<script type='text/javascript'>window.open('index.php');</script>";
+	}
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "lampt";
+$dbname = "lamp";
 
 
 

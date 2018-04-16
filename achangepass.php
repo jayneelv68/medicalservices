@@ -2,6 +2,7 @@
 <html>
 <?php
     session_start();
+    
     if($_GET){
         
         if(isset($_GET["c"])){c();}
@@ -56,43 +57,61 @@
 
 
 <?php
-
-if(isset($_GET["l"]))
-{
-$uname=$_GET["uname"];
-$pass=$_GET["pass"];
-$val=$_GET["gender"];
-    echo $val;
-
-    if($val=="p"){
-        $sql=" ";
-}
-if($val=='d'){
-$sql="UPDATE doctors SET password='$pass' WHERE uname='$uname'";
-
-$servername = "localhost";
-    $username = "root";
-    $password = "";
-    $db="lamp";
-    // Create connection
-    $conn=mysqli_connect($servername, $username, $password,$db);
- $result = $conn->query($sql);
-Echo "updated";
-}
-
-}
-
-
-
-?>
+    
+    if(isset($_GET["lo"]))
+    {
+        $uname=$_GET["uname"];
+        $pass=$_GET["pass"];
+        if(isset($_GET["gender"]) )$val=$_GET["gender"];
+           else $val="";
+        
+        
+        $uppercase = preg_match('@[A-Z]@', $pass);
+        $lowercase = preg_match('@[a-z]@', $pass);
+        $number    = preg_match('@[0-9]@',$pass);
+        
+        if(!$uppercase || !$lowercase || !$number || strlen($pass) < 8)
+        {
+            echo "wrong";
+        }
+        else
+        {
+            $sql="";
+            echo $val;
+            if($val=="p"){
+                $sql="UPDATE patientdetail SET p_password='$pass' WHERE uname='$uname'";
+               
+            }
+            if($val=='d'){
+                $sql="UPDATE doctors SET password='$pass' WHERE uname='$uname'";
+            }
+            
+            
+            
+            
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $db="lamp";
+            // Create connection
+            $conn=mysqli_connect($servername, $username, $password,$db);
+            $result = $conn->query($sql);
+            Echo "updated";
+        }
+        
+    }
+    
+    
+    
+    ?>
 
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
 
- <input type="radio" name="gender" value="p"> Patient<br>
-  <input type="radio" name="gender" value="d"> Doctor<br>
+<input type="radio" name="gender" value="p"> Patient<br>
+<input type="radio" name="gender" value="d"> Doctor<br>
 
 Username:<input type="text" name="uname" required>
 Password:<input type="text" name="pass" required>
-<button type="submit" name="l">Update</button>
+<button type="submit" name="lo">Update</button>
 </form>
 </html>

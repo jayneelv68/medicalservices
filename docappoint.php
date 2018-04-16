@@ -4,6 +4,15 @@
 
 <?php
     session_start();
+	if(isset($_SESSION['login_user']) && !empty($_SESSION['login_user'])) 
+	{
+		;
+	}
+
+	else
+	{
+		echo "<script type='text/javascript'>window.open('index.php');</script>";
+	}
     if($_GET){
         
         if(isset($_GET["c"])){c();}
@@ -76,7 +85,7 @@ Appointments:
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET">
 <?php
     $servername=$username=$password=$conn=$db="";
-    $uname=$_SESSION['login_user']="jay";
+    $uname=$_SESSION['login_user'];
     $row=$columnOne=$columnTwo=$columnThree=$columnFour=$columnFive=$up="";
     echo $_SESSION['login_user'];
     databaseconn();

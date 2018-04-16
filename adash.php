@@ -26,7 +26,7 @@ header("Location: index.php");
 function c()
 {
     
-    header("Location: achangepassword.php");
+    header("Location: achangepass.php");
 }
 function update()
     {

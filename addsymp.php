@@ -53,7 +53,7 @@
 </form>
 
 <?php
-if(isset($_GET["cappoint"])){submit();}
+if(isset($_GET["cappoint1"])){submit();}
 
 Function submit()
 {
@@ -110,4 +110,4 @@ Echo "Added";
 <label for="med"><b>Medicine</b></label>
     <input type="text" name="c8" required>
 
-<button type="submit" name="cappoint">Add symptoms</button>
+<button type="submit" name="cappoint1">Add symptoms</button>

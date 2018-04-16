@@ -2,7 +2,15 @@
 <?php
 
     session_start();
+	if(isset($_SESSION['login_user']) && !empty($_SESSION['login_user'])) 
+	{
+		;
+	}
 
+	else
+	{
+		echo "<script type='text/javascript'>window.open('index.php');</script>";
+	}
 
     $servername=$username=$password=$conn=$db="";
 if($_GET)
@@ -26,7 +34,7 @@ function verify($arg1,$arg2)
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $db="lampt";
+    $db="lamp";
     // Create connection
     $conn=mysqli_connect($servername, $username, $password,$db);
     $f1="";
